@@ -1,0 +1,5 @@
+\select@language {english}
+\contentsline {part}{I\hspace {1em}Lorem Ipsum Dolor}{3}{part.1}
+\contentsline {section}{\numberline {1}testing one more time}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Swaoogg}{4}{subsection.1.1}
+\contentsfinish 

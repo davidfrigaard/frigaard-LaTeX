@@ -18,25 +18,34 @@
 % Setup
 % -------------------------
 \RequirePackage{etoolbox}
+
+\newcommand{\frigaardLaTeX}{frigaard\LaTeX}
 % -------------------------
 
 % Typography
 % -------------------------
 
-\RequirePackage{tgcursor}
-\RequirePackage[T1]{fontenc}
+
 \RequirePackage[protrusion=true, expansion]{microtype}
 
 \newtoggle{osf}
 \toggletrue{osf}
+\newtoggle{sans}
+\togglefalse{sans}
 
 \DeclareOption{nosf}{\togglefalse{osf}}
 \DeclareOption{osf}{\toggletrue{osf}}
+\DeclareOption{nsans}{\togglefalse{sans}}
+\DeclareOption{sans}{\toggletrue{sans}}
 \ProcessOptions
 
 \iftoggle{osf}{\PassOptionsToPackage{osf}{mathpazo}}{}
 
+\RequirePackage[scale=0.9]{tgheros}
+\iftoggle{sans}{\renewcommand*\familydefault{\sfdefault}}{}
+\RequirePackage[scaled]{beramono}
 \RequirePackage[sc]{mathpazo}
+\RequirePackage[T1]{fontenc}
 % -------------------------
 
 % Language
@@ -69,7 +78,7 @@
 		\vspace{0.5\baselineskip}
 		\ifx \@subtitle \empty	\vspace{\baselineskip} \else {\Large\sl\@subtitle} \\ \fi
 		\vspace{2\baselineskip}
-		{\Large\sl\oldstylenums\@date} \\
+		{\Large\sl\@date} \\
 		\vspace{5\baselineskip}
 	\end{flushleft}
 	\end{fullwidth}
@@ -79,13 +88,14 @@
 	\begin{fullwidth}
 	\begin{flushleft}
 		{\Large\sl\@author} \hfill \ifx \@candidatenum \empty \relax \else {\Large\sl\@candidatenum} \fi \\
+		\vspace{0.5\baselineskip}
 		\ifx \@email \empty	\vspace{\baselineskip} \else {\Large\url{\@email}} \fi
 		\vfill
 		{\LARGE\sl\@title} \\
 		\vspace{\baselineskip}
-		\ifx \@email \empty	\vspace{\baselineskip} \else {\Large\sl\@subtitle} \fi \\
+		\ifx \@email \empty	\vspace{\baselineskip} \else {\Large\sl\@subtitle} \fi
 		\vfill \vfill
-		{\Large\sl\oldstylenums\@date} \\
+		{\Large\sl\@date} 
 	\end{flushleft}
 	\end{fullwidth}
 	\clearpage
@@ -123,22 +133,22 @@
 
 \iftoggle{secbreak}{\newcommand{\sectionbreak}{\clearpage}}{\newcommand{\sectionbreak}{}}
 
-\titleformat{\part}[display]{\vspace{10mm}\itshape\rmfamily\raggedright}{\Large Part \thepart}{0mm}{\LARGE}{}
+\titleformat{\part}[display]{\vspace{10mm}\slshape\raggedright}{\Large Part \thepart}{0mm}{\LARGE}{}
 \titlespacing*{\part}{0mm}{-2\baselineskip}{10.5\baselineskip}
 
 \let\oldpart\part
 \renewcommand{\part}{\clearpage\oldpart}
 
-\titleformat{\section}[hang]{\itshape\rmfamily\raggedright}{\Large\thesection.}{5mm}{\Large}{}
+\titleformat{\section}[hang]{\slshape\raggedright}{\Large\thesection.}{5mm}{\Large}{}
 \titlespacing*{\section}{0mm}{2\baselineskip}{\baselineskip}
 
-\titleformat{\subsection}[hang]{\slshape\rmfamily\raggedright}{\Large\thesubsection.}{5mm}{\Large}{}
+\titleformat{\subsection}[hang]{\slshape\raggedright}{\Large\thesubsection.}{5mm}{\Large}{}
 \titlespacing*{\subsection}{0mm}{2\baselineskip}{\baselineskip}
 
-\titleformat{\subsubsection}[hang]{\slshape\rmfamily\raggedright}{\large\thesubsection.}{5mm}{\large}{}
+\titleformat{\subsubsection}[hang]{\slshape\raggedright}{\large\thesubsection.}{5mm}{\large}{}
 \titlespacing*{\subsubsection}{0mm}{\baselineskip}{\baselineskip}
 
-\titleformat{\paragraph}[runin]{\normalsize\slshape\rmfamily\raggedright}{}{5mm}{}{}
+\titleformat{\paragraph}[runin]{\normalsize\slshape\raggedright}{}{5mm}{}{}
 
 \newcommand{\chapter}{\PackageError{The \protect\chapter\space command is unavaliable in the frigaardreport class.}}
 \renewcommand{\subparagraph}{\PackageError{The \protect\subparagraph\space command is unavaliable in the frigaardreport class.}}
@@ -178,7 +188,7 @@
 	\setlength{\headwidth}{150mm}
 	\newgeometry{layoutheight=297mm, layoutwidth=210mm, lmargin=30mm, rmargin=30mm, includemp, marginparsep=7mm, marginparwidth=60mm}
 	\renewenvironment{fullwidth}{
-		\begin{adjustwidth}{}{-67mm}
+	\begin{adjustwidth}{}{-67mm}
 		\changetext{0mm}{67mm}{0mm}{67mm}{0mm}}
 		{\end{adjustwidth}
 		\changetext{0mm}{-67mm}{0mm}{-67mm}{0mm}}}
@@ -202,7 +212,8 @@
 			\begin{adjustwidth}{}{-113mm}
 			\changetext{0mm}{113mm}{0mm}{113mm}{0mm}}
 			{\end{adjustwidth}
-			\changetext{0mm}{-113mm}{0mm}{-113mm}{0mm}}}
+			\changetext{0mm}{-113mm}{0mm}{-113mm}{0mm}
+			\noindent}}
 	
 \pagelayout{pnomargin}
 % -------------------------
@@ -211,15 +222,31 @@
 % -------------------------
 \RequirePackage{titletoc}
 
+\newtoggle{iltoc}
+\toggletrue{iltoc}
+\newtoggle{fwtoc}
+\toggletrue{fwtoc}
+
+\DeclareOption{iltoc}{\toggletrue{iltoc}}
+\DeclareOption{fptoc}{\togglefalse{iltoc}}
+\DeclareOption{fwtoc}{\toggletrue{fwtoc}}
+\DeclareOption{twtoc}{\togglefalse{fwtoc}}
+\ProcessOptions
+
 \titlecontents{part}[0mm]{\large\sl}{}{}{\hfill\contentspage}[\addvspace{\baselineskip}]
 
-\titlecontents{section}[10mm]{\large\sl}{\contentslabel{10mm}}{\hspace{-10mm}}{\hfill\contentspage}[]
+\titlecontents{section}[10mm]{\large\sl}{\contentslabel{10mm}}{\hspace{-10mm}}{\hfill\contentspage}[\addvspace{0.5\baselineskip}]
 
 \dottedcontents{subsection}[20mm]{\sl}{10mm}{3mm}
 
 \dottedcontents{subsubsection}[30mm]{\sl}{10mm}{3mm}
 
 \setcounter{tocdepth}{3}
+
+\let\oldtoc\tableofcontents
+
+\iftoggle{iltoc}{\renewcommand{\tableofcontents}{\oldtoc\addvspace{4\baselineskip}}}{\renewcommand{\tableofcontents}{\clearpage\oldtoc\clearpage}}
+
 % -------------------------
 
 % Maths
@@ -227,4 +254,9 @@
 \RequirePackage{amsmath}
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}
+% -------------------------
+
+% Table
+% -------------------------
+\RequirePackage{booktabs}
 % -------------------------

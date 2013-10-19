@@ -1,4 +1,0 @@
-\select@language {english}
-\contentsline {section}{\numberline {1}Typography \& Typesetting}{1}{section.1}
-\contentsline {subsection}{\numberline {1.1}Implementation}{2}{subsection.1.1}
-\contentsfinish 

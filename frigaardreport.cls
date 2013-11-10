@@ -5,6 +5,7 @@
 % Table of Contents
 % -------------------------
 % Setup
+% Colors
 % Typography
 % Language
 % Titlepage
@@ -23,6 +24,11 @@
 \RequirePackage{etoolbox}
 
 \newcommand{\frigaardLaTeX}{frigaard\LaTeX}
+% -------------------------
+
+% Colors
+% -------------------------
+\RequirePackage[x11names,table]{xcolor}
 % -------------------------
 
 % Typography
@@ -44,9 +50,11 @@
 
 \RequirePackage[scale=0.9]{tgheros}
 \iftoggle{sans}{\renewcommand*\familydefault{\sfdefault}}{}
-\RequirePackage[scaled]{beramono}
+\RequirePackage[scaled]{uarial}
 \RequirePackage[sc]{mathpazo}
 \RequirePackage[T1]{fontenc}
+
+\iftoggle{sans}{\linespread{1.05}}{\linespread{1.1}}
 % -------------------------
 
 % Language
@@ -94,7 +102,7 @@
 		\vfill
 		{\LARGE\sl\@title} \\
 		\vspace{\baselineskip}
-		\ifx \@email \empty	\vspace{\baselineskip} \else {\Large\sl\@subtitle} \fi
+		\ifx \@subtitle \empty	\vspace{\baselineskip} \else {\Large\sl\@subtitle} \fi
 		\vfill \vfill
 		{\Large\sl\@date} 
 	\end{flushleft}
@@ -140,13 +148,13 @@
 \let\oldpart\part
 \renewcommand{\part}{\clearpage\oldpart}
 
-\titleformat{\section}[hang]{\slshape\raggedright}{\Large\thesection.}{5mm}{\Large}{}
+\titleformat{\section}[hang]{\slshape\raggedright}{\Large\thesection.}{5mm}{\LARGE}{}
 \titlespacing*{\section}{0mm}{2\baselineskip}{\baselineskip}
 
-\titleformat{\subsection}[hang]{\slshape\raggedright}{\Large\thesubsection.}{5mm}{\Large}{}
+\titleformat{\subsection}[hang]{\slshape\raggedright}{\large\thesubsection.}{5mm}{\Large}{}
 \titlespacing*{\subsection}{0mm}{2\baselineskip}{\baselineskip}
 
-\titleformat{\subsubsection}[hang]{\slshape\raggedright}{\large\thesubsection.}{5mm}{\large}{}
+\titleformat{\subsubsection}[hang]{\slshape\raggedright}{\normalsize\thesubsubsection.}{5mm}{\large}{}
 \titlespacing*{\subsubsection}{0mm}{\baselineskip}{\baselineskip}
 
 \titleformat{\paragraph}[runin]{\normalsize\slshape\raggedright}{}{5mm}{}{}

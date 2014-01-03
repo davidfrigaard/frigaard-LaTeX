@@ -48,9 +48,8 @@
 
 \iftoggle{osf}{\PassOptionsToPackage{osf}{mathpazo}}{}
 
-\RequirePackage[scale=0.9]{tgheros}
 \iftoggle{sans}{\renewcommand*\familydefault{\sfdefault}}{}
-\RequirePackage[scaled]{uarial}
+\RequirePackage[scaled]{sourcesanspro}
 \RequirePackage[sc]{mathpazo}
 \RequirePackage[T1]{fontenc}
 

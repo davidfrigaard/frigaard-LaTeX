@@ -1,0 +1,11 @@
+Frigaard LaTeX class changelog:
+===============================
+
+Entries are in "DD/MM/YYYY [Author]" format. 
+
+03/01/2014 David Frigaard:
+
+Release
+
+
+

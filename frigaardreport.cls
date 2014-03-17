@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}[2011/06/27]
-\ProvidesClass{frigaardreportF}[2013/07/24]
+\ProvidesClass{frigaardreport}[2013/07/24]
 \LoadClass[12pt,a4paper]{article}
 
 % Table of Contents
@@ -52,6 +52,7 @@
 \RequirePackage[scaled]{sourcesanspro}
 \RequirePackage[sc]{mathpazo}
 \RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
 
 \iftoggle{sans}{\linespread{1.05}}{\linespread{1.1}}
 % -------------------------
@@ -74,6 +75,8 @@
 \newcommand{\cnum}[1]{\def \@candidatenum{#1}} \cnum{}
 \newcommand{\subtitle}[1]{\def \@subtitle{#1}} \subtitle{}
 \newcommand{\email}[1]{\def \@email{#1}} \email{}
+\newcommand{\school}[1]{\def \@school{#1}} \school{}
+\newcommand{\wordcount}[1]{\def \@wordcount{#1}} \wordcount{}
 
 \iftoggle{iltitle}
 {\def \maketitle{
@@ -99,10 +102,14 @@
 		\vspace{0.5\baselineskip}
 		\ifx \@email \empty	\vspace{\baselineskip} \else {\Large\url{\@email}} \fi
 		\vfill
-		{\LARGE\sl\@title} \\
+		{\LARGE\sl\@title}
 		\vspace{\baselineskip}
 		\ifx \@subtitle \empty	\vspace{\baselineskip} \else {\Large\sl\@subtitle} \fi
 		\vfill \vfill
+		{\large\sl\@wordcount} \\
+		\vspace{\baselineskip}
+		{\large\sl\@school} \\
+		\vspace{2\baselineskip}
 		{\Large\sl\@date} 
 	\end{flushleft}
 	\end{fullwidth}
@@ -260,6 +267,7 @@
 \RequirePackage{amsmath}
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}
+\RequirePackage{siunitx}
 % -------------------------
 
 % Figures, Tables and Floats
